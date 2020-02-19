@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name"></string>
+    <string name="app_name">계산기</string>
     <string name="action_save">기록</string>
     <string name="action_theme">테마 선택</string>
     <string name="num">숫자</string>
@@ -14,4 +14,5 @@
     <string name="eight">8</string>
     <string name="nine">9</string>
     <string name="zero">0</string>
+    <string name="point">.</string>
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.taewon.cal.LineActivity">
+    <item
+        android:id="@+id/sel_del"
+        android:orderInCategory="1"
+        android:title="선택 삭제"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/all_del"
+        android:orderInCategory="2"
+        android:title="전체 삭제"
+        app:showAsAction="never">
+    </item>
+    <item
+        android:id="@+id/del_wow"
+        android:orderInCategory="3"
+        android:title="삭제결정"
+        app:showAsAction="never">
+    </item>
+</menu>

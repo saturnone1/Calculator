@@ -5,7 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context="com.taewon.cal.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary"
+        android:id="@+id/main_toolbar">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Calculator"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title"
+            />
+    </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,6 +27,7 @@
         android:orientation="horizontal">
 
         <Button
+            android:id="@+id/raddegUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -38,7 +53,7 @@
             android:background="@null"
             android:hint="@string/num"
             android:inputType="textPersonName"
-            android:textColorHint="#000000"
+            android:textColorHint="#A4A4A4"
             android:textSize="32sp" />
     </RelativeLayout>
 
@@ -48,6 +63,7 @@
         android:layout_marginBottom="10dp">
 
         <TextView
+            android:id ="@+id/cal_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -71,6 +87,7 @@
 
     <TableLayout
         android:layout_width="match_parent"
+
         android:layout_height="140dp"
         android:layout_margin="10dp"
         android:shrinkColumns="*">
@@ -87,23 +104,27 @@
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/raddegDown"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="RAD" />
 
             <Button
+                android:id = "@+id/sin"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Sin"
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/cos"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Cos"
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/tan"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="Tan"
@@ -116,30 +137,35 @@
             android:layout_weight="1">
 
             <Button
+                android:id = "@+id/mod"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="%"
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/ln"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="ln"
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/log"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="log"
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/route"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="√"
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/power"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="^"
@@ -152,30 +178,35 @@
             android:layout_weight="1">
 
             <Button
+                android:id="@+id/pi"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="𝜋"
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/constant"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="e"
                 android:textAllCaps="false" />
 
             <Button
+                android:id ="@+id/left_bracket"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="("
                 android:textAllCaps="false" />
 
             <Button
+                android:id ="@+id/right_bracket"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text=")"
                 android:textAllCaps="false" />
 
             <Button
+                android:id="@+id/factorial"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="!"
@@ -230,6 +261,7 @@
                 android:textSize="25sp" />
 
             <Button
+                android:id ="@+id/clear"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="C"
@@ -278,6 +310,7 @@
                 android:textSize="25sp" />
 
             <Button
+                android:id="@+id/del"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="DEL"
@@ -345,11 +378,13 @@
                 android:onClick = "CM"/>
 
             <Button
+                android:id="@+id/point"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="."
+                android:text="@string/point"
                 android:textAllCaps="false"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:onClick="CM"/>
 
             <Button
                 android:layout_width="wrap_content"
@@ -365,6 +400,7 @@
                 android:textSize="25sp" />
 
             <Button
+                android:id ="@+id/make_result"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="="
