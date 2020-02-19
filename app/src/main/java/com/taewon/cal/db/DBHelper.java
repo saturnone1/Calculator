@@ -1,11 +1,12 @@
-package com.taewon.cal;
+package com.taewon.cal.db;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
+
+import com.taewon.cal.db.model.ListDB;
 
 public class DBHelper extends SQLiteOpenHelper {
     

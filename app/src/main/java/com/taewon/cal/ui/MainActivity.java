@@ -1,4 +1,4 @@
-package com.taewon.cal;
+package com.taewon.cal.ui;
 
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +14,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.taewon.cal.R;
+import com.taewon.cal.calculate.Calculator;
+import com.taewon.cal.db.DBControl;
+import com.taewon.cal.db.DBHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -101,14 +106,15 @@ public class MainActivity extends AppCompatActivity {
                 String may = RDButtonUp.getText().toString();
                 String raw = edittext.getText().toString();
 
-                //괄호갯수, 마지막에 들어갈 수 있는 문자인지 확인
+                //괄호갯수, 마지막에 들어갈 수 있는 문자인지 확인 - 예외처리
                 if(raw == null || raw.equals("")){
                     textview.setText("수식을 입력하세요");
                     return;
                 }
+
                 if (v.getId() == R.id.make_result && bracket_open == bracket_close && "0123456789)!".contains(raw.substring(raw.length()-1,raw.length()))) {
                     Calculator calculator = new Calculator(raw);
-                    String resultText = calculator.cal_main(may);
+                    String resultText = calculator.createResult(may);
                     textview.setText(resultText);
                     long wow = dBcontrol.insertColumn("n", getTime,raw,resultText);
                     System.out.println(wow);
@@ -180,7 +186,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     //숫자 클릭부분
-    public void CM(View v) {
+    public void numberInput(View v) {
         switch (v.getId()) {
             case R.id.one:
                 edittext.setText(edittext.getText() + "1");
@@ -232,10 +238,14 @@ public class MainActivity extends AppCompatActivity {
                 some_cal_before.clear();
             }
             if (v.getId() == R.id.del) {
-                if (edittext.getText().toString().charAt(edittext.getText().toString().length() - 1) == ')') {
-                    bracket_close--;
-                } else if (edittext.getText().toString().charAt(edittext.getText().toString().length() - 1) == '(') {
-                    bracket_open--;
+                try{
+                    if (edittext.getText().toString().charAt(edittext.getText().toString().length() - 1) == ')') {
+                        bracket_close--;
+                    } else if (edittext.getText().toString().charAt(edittext.getText().toString().length() - 1) == '(') {
+                        bracket_open--;
+                    }
+                } catch(Exception e){
+                    return;
                 }
                 edittext.setText(edittext.getText().toString().substring(0, edittext.getText().toString().length() - 1));
             }
@@ -298,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_save :
                 Toast.makeText(getApplicationContext(), "기록", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(MainActivity.this,LineActivity.class);
+                Intent intent = new Intent(MainActivity.this, LineActivity.class);
                 startActivity(intent);
                 return true;
             default:

@@ -1,4 +1,4 @@
-package com.taewon.cal;
+package com.taewon.cal.db.model;
 
 public class DataInfo {
 

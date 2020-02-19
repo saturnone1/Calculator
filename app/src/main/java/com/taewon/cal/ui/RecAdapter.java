@@ -1,6 +1,5 @@
-package com.taewon.cal;
+package com.taewon.cal.ui;
 
-import android.util.ArrayMap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +10,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.taewon.cal.R;
+import com.taewon.cal.db.model.DataInfo;
+
 import java.util.ArrayList;
 
 public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecHolder> {
 
     private ArrayList<DataInfo> mDataSet;
-    private boolean pop = false;
+    private boolean mIsDelMode = false;
 
-    public ArrayList<DataInfo> getmDataSet() {
+    public ArrayList<DataInfo> getDataSet() {
         return mDataSet;
     }
 
@@ -26,8 +28,8 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecHolder> {
         this.mDataSet = data;
     }
 
-    public void setSelMod(boolean sel){
-        this.pop = sel;
+    public void setDelMode(boolean sel){
+        this.mIsDelMode = sel;
         notifyDataSetChanged();
     }
 
@@ -46,31 +48,25 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecHolder> {
         holder.ggulgua.setText(mDataSet.get(position).getResult());
         holder.susik.setText(mDataSet.get(position).getSusik());
 
-        holder.checkBox.setOnCheckedChangeListener(null);
-
         //선택삭제를 눌렀는지
-        if(pop == true){
+        if (mIsDelMode == true) {
             holder.checkBox.setVisibility(View.VISIBLE);
-        }
-        else{
+
+            holder.checkBox.setOnCheckedChangeListener(null);
+
+            //체크여부를 확인
+            holder.checkBox.setChecked(mDataSet.get(position).isDel());
+
+            //체크박스에 리스너 구현해서 클릭시 이벤트
+            holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    mDataSet.get(position).setDel(isChecked);
+                }
+            });
+        } else {
             holder.checkBox.setVisibility(View.GONE);
         }
-
-        //체크여부를 확인
-        if(mDataSet.get(position).isDel() == true){
-            holder.checkBox.setChecked(true);
-        }
-        else{
-            holder.checkBox.setChecked(false);
-        }
-
-        //체크박스에 리스너 구현해서 클릭시 이벤트
-        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked){
-                    mDataSet.get(position).setDel(isChecked);
-            }
-        });
     }
 
     @Override

@@ -1,14 +1,10 @@
-package com.taewon.cal;
+package com.taewon.cal.db;
 
 import android.content.ContentValues;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.BaseColumns;
-import android.service.autofill.Dataset;
-import android.util.ArrayMap;
-import android.util.Log;
 
-import com.taewon.cal.ListDB;
+import com.taewon.cal.db.model.DataInfo;
+import com.taewon.cal.db.model.ListDB;
 
 import java.util.ArrayList;
 
@@ -29,7 +25,7 @@ public class DBControl {
         return db.insert(ListDB.ListEntry.TABLE_NAME, null, values);
     }
 
-    public void delUpdate(ArrayList<DataInfo> seldel) {
+    public void modifyUpdate(ArrayList<DataInfo> seldel) {
 
         String toY = "y";
         ContentValues values = new ContentValues();

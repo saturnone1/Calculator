@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.taewon.cal.MainActivity">
+    tools:context="com.taewon.cal.ui.MainActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -232,7 +232,7 @@
                 android:text="@string/seven"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id = "@+id/eight"
@@ -241,7 +241,7 @@
                 android:text="@string/eight"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id = "@+id/nine"
@@ -250,7 +250,7 @@
                 android:text="@string/nine"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id="@+id/div"
@@ -281,7 +281,7 @@
                 android:text="@string/four"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id = "@+id/five"
@@ -290,7 +290,7 @@
                 android:text="@string/five"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id = "@+id/six"
@@ -299,7 +299,7 @@
                 android:text="@string/six"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id="@+id/mul"
@@ -329,7 +329,7 @@
                 android:text="@string/one"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id = "@+id/two"
@@ -338,7 +338,7 @@
                 android:text="@string/two"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id = "@+id/three"
@@ -347,7 +347,7 @@
                 android:text="@string/three"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id="@+id/minus"
@@ -375,7 +375,7 @@
                 android:text="@string/zero"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick = "CM"/>
+                android:onClick = "numberInput"/>
 
             <Button
                 android:id="@+id/point"
@@ -384,7 +384,7 @@
                 android:text="@string/point"
                 android:textAllCaps="false"
                 android:textSize="25sp"
-                android:onClick="CM"/>
+                android:onClick="numberInput"/>
 
             <Button
                 android:layout_width="wrap_content"
