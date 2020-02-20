@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private int bracket_close = 0; //닫은 괄호 개수 체크
 
     // 현재시간 체크
-    //private long now = System.currentTimeMillis();
-    //private Date mDate;
-    //private SimpleDateFormat date;
-    //private String getTime;
+    private long now = System.currentTimeMillis();
+    private Date mDate;
+    private SimpleDateFormat date;
+    private String getTime;
 
     //db 인스턴스화 해서 액세스
     private DBHelper dbHelper;
@@ -70,11 +70,9 @@ public class MainActivity extends AppCompatActivity {
         dBcontrol = new DBControl(dbW);
 
         //시간 받기
-/*
         date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         mDate = new Date(now);
         getTime = date.format(mDate);
-*/
 
         //래디안 디그리 버튼
         RDButtonUp = (Button) findViewById(R.id.raddegUp);
@@ -118,8 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     Calculator calculator = new Calculator(raw, may);
                     String resultText = calculator.createResult();
                     textview.setText(resultText);
-                    long wow = dBcontrol.insertColumn("n", getNow(),raw,resultText);
-                    System.out.println(wow);
+                    dBcontrol.insertColumn("n", getNow(),raw,resultText);
                 } else {
                     textview.setText("잘못된 식입니다.");
                 }
@@ -195,46 +192,41 @@ public class MainActivity extends AppCompatActivity {
 
     //숫자 클릭부분
     public void numberInput(View v) {
-        String inputNum = "";
-
         switch (v.getId()) {
             case R.id.one:
-                inputNum = "1";
+                edittext.setText(edittext.getText() + "1");
                 break;
             case R.id.two:
-                inputNum = "2";
+                edittext.setText(edittext.getText() + "2");
                 break;
             case R.id.three:
-                inputNum = "3";
+                edittext.setText(edittext.getText() + "3");
                 break;
             case R.id.four:
-                inputNum = "4";
+                edittext.setText(edittext.getText() + "4");
                 break;
             case R.id.five:
-                inputNum = "5";
+                edittext.setText(edittext.getText() + "5");
                 break;
             case R.id.six:
-                inputNum = "6";
+                edittext.setText(edittext.getText() + "6");
                 break;
             case R.id.seven:
-                inputNum = "7";
+                edittext.setText(edittext.getText() + "7");
                 break;
             case R.id.eight:
-                inputNum = "8";
+                edittext.setText(edittext.getText() + "8");
                 break;
             case R.id.nine:
-                inputNum = "9";
+                edittext.setText(edittext.getText() + "9");
                 break;
             case R.id.zero:
-                inputNum = "0";
+                edittext.setText(edittext.getText() + "0");
                 break;
             case R.id.point:
-                inputNum = ".";
+                edittext.setText(edittext.getText() + ".");
                 break;
         }
-
-        edittext.setText(edittext.getText() + inputNum);
-
         some_cal_before.add(something_cal);
         something_cal = 0;
     }

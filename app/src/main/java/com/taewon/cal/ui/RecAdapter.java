@@ -28,8 +28,22 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecHolder> {
         this.mDataSet = data;
     }
 
-    public void setDelMode(boolean sel){
-        this.mIsDelMode = sel;
+    public void setData(ArrayList<DataInfo> data){
+        mDataSet = data;
+        notifyDataSetChanged();
+    }
+
+    public void setAllDelMode(ArrayList<DataInfo> data){
+        this.mIsDelMode = true;
+        mDataSet = data;
+        for(int i=0;i<data.size();i++){
+            mDataSet.get(i).setDel(true);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void setDelMode(){
+        this.mIsDelMode = true;
         notifyDataSetChanged();
     }
 
@@ -48,14 +62,11 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecHolder> {
         holder.ggulgua.setText(mDataSet.get(position).getResult());
         holder.susik.setText(mDataSet.get(position).getSusik());
 
-        //선택삭제를 눌렀는지
+        holder.checkBox.setOnCheckedChangeListener(null);
+
+        //삭제를 눌렀는지
         if (mIsDelMode == true) {
             holder.checkBox.setVisibility(View.VISIBLE);
-
-            holder.checkBox.setOnCheckedChangeListener(null);
-
-            //체크여부를 확인
-            holder.checkBox.setChecked(mDataSet.get(position).isDel());
 
             //체크박스에 리스너 구현해서 클릭시 이벤트
             holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -64,9 +75,14 @@ public class RecAdapter extends RecyclerView.Adapter<RecAdapter.RecHolder> {
                     mDataSet.get(position).setDel(isChecked);
                 }
             });
-        } else {
+        }
+
+        else {
             holder.checkBox.setVisibility(View.GONE);
         }
+
+        //체크여부를 checkBox에 넣어준다.
+        holder.checkBox.setChecked(mDataSet.get(position).isDel());
     }
 
     @Override
