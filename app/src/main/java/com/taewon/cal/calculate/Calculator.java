@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class Calculator {
 
     private String mRaw;
+    private DegRad mWhy;
 
     private ArrayList<Float>mDeepQueue = new <Float>ArrayList(); // 깊이 및 순서 큐 생성
     private ArrayList<BigDecimal> mSaveNum = new <BigDecimal>ArrayList(); // 숫자 저장
@@ -21,8 +22,9 @@ public class Calculator {
     private float mTriangle = 3; //삼각함수 3으로 고정
     private float mBracket = 10; // 괄호의 깊이 증가율 10
 
-    public Calculator(String raw) {
+    public Calculator(String raw, DegRad why) {
         this.mRaw = raw;
+        this.mWhy = why;
     }
 
     //연산자 읽어오기 - 여기서 우선순위 스택을 쌓는다.
@@ -90,7 +92,7 @@ public class Calculator {
         }
     }
 
-    public String createResult(String why) {// 메인 계산부분
+    public String createResult() {// 메인 계산부분
         inputNum(mRaw);
         inputDeep(mRaw);
 
@@ -115,7 +117,7 @@ public class Calculator {
 
             //삼각함수 계산용 라디안 변환
             double num = Double.parseDouble(b.toString());
-            if(why.contains("DEG")) {
+            if(DegRad.DEG.equals(mWhy)) {
                 num = (num*Math.PI)/180;
             }
 

@@ -3,20 +3,20 @@ package com.taewon.cal.ui;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.MenuItem;
-import android.view.View;
-import android.view.Menu;
-import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Button;
-import android.widget.Toast;
-
 import com.taewon.cal.R;
 import com.taewon.cal.calculate.Calculator;
+import com.taewon.cal.calculate.DegRad;
 import com.taewon.cal.db.DBControl;
 import com.taewon.cal.db.DBHelper;
 
@@ -39,10 +39,10 @@ public class MainActivity extends AppCompatActivity {
     private int bracket_close = 0; //닫은 괄호 개수 체크
 
     // 현재시간 체크
-    private long now = System.currentTimeMillis();
-    private Date mDate;
-    private SimpleDateFormat date;
-    private String getTime;
+    //private long now = System.currentTimeMillis();
+    //private Date mDate;
+    //private SimpleDateFormat date;
+    //private String getTime;
 
     //db 인스턴스화 해서 액세스
     private DBHelper dbHelper;
@@ -70,9 +70,11 @@ public class MainActivity extends AppCompatActivity {
         dBcontrol = new DBControl(dbW);
 
         //시간 받기
+/*
         date = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         mDate = new Date(now);
         getTime = date.format(mDate);
+*/
 
         //래디안 디그리 버튼
         RDButtonUp = (Button) findViewById(R.id.raddegUp);
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         Button make_result = (Button) findViewById(R.id.make_result);
         make_result.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                String may = RDButtonUp.getText().toString();
+                DegRad may = "DEG".equals(RDButtonUp.getText().toString()) ? DegRad.DEG : DegRad.RAD;
                 String raw = edittext.getText().toString();
 
                 //괄호갯수, 마지막에 들어갈 수 있는 문자인지 확인 - 예외처리
@@ -113,16 +115,22 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (v.getId() == R.id.make_result && bracket_open == bracket_close && "0123456789)!".contains(raw.substring(raw.length()-1,raw.length()))) {
-                    Calculator calculator = new Calculator(raw);
-                    String resultText = calculator.createResult(may);
+                    Calculator calculator = new Calculator(raw, may);
+                    String resultText = calculator.createResult();
                     textview.setText(resultText);
-                    long wow = dBcontrol.insertColumn("n", getTime,raw,resultText);
+                    long wow = dBcontrol.insertColumn("n", getNow(),raw,resultText);
                     System.out.println(wow);
                 } else {
                     textview.setText("잘못된 식입니다.");
                 }
             }
         });
+    }
+
+    private String getNow() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+        Date now = new Date(System.currentTimeMillis());
+        return dateFormat.format(now);
     }
 
     @Override
@@ -187,41 +195,46 @@ public class MainActivity extends AppCompatActivity {
 
     //숫자 클릭부분
     public void numberInput(View v) {
+        String inputNum = "";
+
         switch (v.getId()) {
             case R.id.one:
-                edittext.setText(edittext.getText() + "1");
+                inputNum = "1";
                 break;
             case R.id.two:
-                edittext.setText(edittext.getText() + "2");
+                inputNum = "2";
                 break;
             case R.id.three:
-                edittext.setText(edittext.getText() + "3");
+                inputNum = "3";
                 break;
             case R.id.four:
-                edittext.setText(edittext.getText() + "4");
+                inputNum = "4";
                 break;
             case R.id.five:
-                edittext.setText(edittext.getText() + "5");
+                inputNum = "5";
                 break;
             case R.id.six:
-                edittext.setText(edittext.getText() + "6");
+                inputNum = "6";
                 break;
             case R.id.seven:
-                edittext.setText(edittext.getText() + "7");
+                inputNum = "7";
                 break;
             case R.id.eight:
-                edittext.setText(edittext.getText() + "8");
+                inputNum = "8";
                 break;
             case R.id.nine:
-                edittext.setText(edittext.getText() + "9");
+                inputNum = "9";
                 break;
             case R.id.zero:
-                edittext.setText(edittext.getText() + "0");
+                inputNum = "0";
                 break;
             case R.id.point:
-                edittext.setText(edittext.getText() + ".");
+                inputNum = ".";
                 break;
         }
+
+        edittext.setText(edittext.getText() + inputNum);
+
         some_cal_before.add(something_cal);
         something_cal = 0;
     }
