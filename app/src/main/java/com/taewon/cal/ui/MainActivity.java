@@ -116,8 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     Calculator calculator = new Calculator(raw);
                     String resultText = calculator.createResult(may);
                     textview.setText(resultText);
-                    long wow = dBcontrol.insertColumn("n", getTime,raw,resultText);
-                    System.out.println(wow);
+                    dBcontrol.insertColumn("n", getTime,raw,resultText);
                 } else {
                     textview.setText("잘못된 식입니다.");
                 }
